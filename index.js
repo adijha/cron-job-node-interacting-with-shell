@@ -4,10 +4,15 @@ const fs = require('fs');
 
 app = express();
 
-//shedule tasks every minute
+//shedule tasks to run on server
 
-cron.schedule('* * * * *', () => {
-	console.log('running task every minute');
+cron.schedule('* * 21 * *', () => {
+	console.log('-----------------------');
+	console.log('running cron job');
+	fs.unlink('./error.log', (err) => {
+		if (err) throw err;
+		console.log('error lile successfully deleted');
+	});
 });
 
 app.listen(3218);
